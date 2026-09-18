@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Parcerias · Coffilipe ☕</title>
+  <style>
+    :root{
+      --cafe:#5b3a29; --creme:#f6efe7; --creme2:#efe4d6; --texto:#2a211c; --mudo:#8a7d72;
+      --borda:#e3d6c6; --branco:#fffdfb; --vermelho:#c0392b;
+      --sombra:0 1px 3px rgba(60,40,20,.12);
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    body{margin:0;font-family:-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--creme);color:var(--texto)}
+    .topo{background:var(--cafe);color:#fff;text-align:center;padding:22px 16px}
+    .topo .logo{font-size:34px}
+    .topo h1{margin:6px 0 2px;font-size:20px}
+    .topo p{margin:6px auto 0;color:#e8d8c8;font-size:13px;max-width:520px;line-height:1.4}
+    main{max-width:520px;margin:0 auto;padding:14px}
+    .q{background:var(--branco);border:1px solid var(--borda);border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:var(--sombra)}
+    label{display:block;font-size:14px;font-weight:600;margin-bottom:8px}
+    .req{color:var(--vermelho)}
+    input,select,textarea{width:100%;padding:12px;font-size:16px;border:1px solid var(--borda);border-radius:10px;background:#fff;color:var(--texto);font-family:inherit}
+    textarea{min-height:110px;resize:vertical}
+    .btn{width:100%;padding:15px;font-size:16px;font-weight:600;border:none;border-radius:12px;background:var(--cafe);color:#fff;cursor:pointer;margin-top:4px}
+    .btn:active{transform:scale(.99)}
+    .erro{color:var(--vermelho);font-size:13px;text-align:center;margin:8px 0 0}
+    .rodape{text-align:center;color:var(--mudo);font-size:12px;padding:8px 0 30px}
+    .obrigado{text-align:center;padding:60px 24px}
+    .obrigado .big{font-size:64px}
+    .obrigado h2{margin:14px 0 6px;color:var(--cafe)}
+    .obrigado p{color:var(--mudo);max-width:420px;margin:0 auto;line-height:1.5}
+    .oculto{display:none}
+  </style>
+</head>
+<body>
+
+  <div id="form">
+    <header class="topo">
+      <div class="logo">🤝</div>
+      <h1>Parcerias · Coffilipe</h1>
+      <p>Quer construir algo junto com o Coffilipe? Conta pra gente — o Filipe responde pessoalmente. ☕</p>
+    </header>
+
+    <main>
+      <div class="q">
+        <label>Seu nome (ou da marca) <span class="req">*</span></label>
+        <input id="nome" type="text" placeholder="Como te chamamos?">
+      </div>
+
+      <div class="q">
+        <label>WhatsApp</label>
+        <input id="whatsapp" type="tel" inputmode="tel" placeholder="(DDD) 90000-0000">
+      </div>
+
+      <div class="q">
+        <label>E-mail</label>
+        <input id="email" type="email" placeholder="voce@email.com">
+      </div>
+
+      <div class="q">
+        <label>Que tipo de parceria você quer fazer? <span class="req">*</span></label>
+        <select id="tipo">
+          <option value="">Selecione...</option>
+          <option>Divulgação / permuta</option>
+          <option>Fornecer produtos ou insumos</option>
+          <option>Ponto de venda / revenda</option>
+          <option>Evento / ação</option>
+          <option>Conteúdo / colaboração (redes)</option>
+          <option>Patrocínio</option>
+          <option>Outro</option>
+        </select>
+      </div>
+
+      <div class="q">
+        <label>Conte um pouco da ideia</label>
+        <textarea id="mensagem" placeholder="O que você tem em mente?"></textarea>
+      </div>
+
+      <button class="btn" onclick="enviar()">Enviar proposta</button>
+      <p id="erro" class="erro"></p>
+      <p class="rodape">☕ Coffilipe — um bom dia, escrito à mão</p>
+    </main>
+  </div>
+
+  <div id="obrigado" class="obrigado oculto">
+    <div class="big">🤝☕</div>
+    <h2>Recebido! Obrigado 💛</h2>
+    <p>Sua proposta chegou pro Filipe. Em breve ele entra em contato por aí. Até já!</p>
+  </div>
+
+  <script>
+    var URL_BACKEND = 'https://script.google.com/macros/s/AKfycbz5eqDGRsC3L91xt9qBE0EA-fAVQbf6bvEBDElCxLmbcXlsJRtReUizc9oZ9AS92T2v8w/exec';
+
+    function agradecer(){
+      document.getElementById('form').classList.add('oculto');
+      document.getElementById('obrigado').classList.remove('oculto');
+      window.scrollTo(0,0);
+    }
+
+    function enviar(){
+      var dados = {
+        form: 'parceria',
+        nome: document.getElementById('nome').value.trim(),
+        whatsapp: document.getElementById('whatsapp').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        tipo: document.getElementById('tipo').value,
+        mensagem: document.getElementById('mensagem').value.trim()
+      };
+      var erro = document.getElementById('erro');
+      if(!dados.nome || !dados.tipo){
+        erro.textContent = 'Preencha o nome e o tipo de parceria.'; return;
+      }
+      if(!dados.whatsapp && !dados.email){
+        erro.textContent = 'Deixe pelo menos um contato (WhatsApp ou e-mail).'; return;
+      }
+      erro.textContent = '';
+      var btn = document.querySelector('.btn');
+      btn.textContent = 'Enviando...'; btn.disabled = true;
+
+      fetch(URL_BACKEND, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(dados)
+      }).then(function(){ agradecer(); })
+        .catch(function(){
+          btn.textContent = 'Enviar proposta'; btn.disabled = false;
+          erro.textContent = 'Ops, não consegui enviar. Confira a internet e tente de novo.';
+        });
+    }
+  </script>
+</body>
+</html>
