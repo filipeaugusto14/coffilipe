@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coffilipe — Links</title>
+  <style>
+    :root{
+      --cafe:#5b3a29; --cafe-esc:#3d2519; --creme:#f6efe7; --creme2:#efe4d6;
+      --texto:#2a211c; --mudo:#c9b6a3; --branco:#fffdfb; --borda:rgba(255,255,255,.14);
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    body{
+      margin:0;min-height:100vh;font-family:-apple-system,"Segoe UI",Roboto,sans-serif;color:#fff;
+      background:radial-gradient(120% 90% at 50% 0%, #6b452f 0%, #4d301f 55%, #331f13 100%);
+      display:flex;flex-direction:column;align-items:center;padding:36px 18px 40px;
+    }
+    .avatar{width:110px;height:110px;border-radius:50%;box-shadow:0 6px 22px rgba(0,0,0,.3);border:3px solid rgba(255,255,255,.18)}
+    h1{margin:14px 0 2px;font-size:24px;font-family:Georgia,"Times New Roman",serif}
+    .tag{margin:0;color:#e8d8c8;font-size:14px}
+    .links{width:100%;max-width:440px;margin-top:26px;display:flex;flex-direction:column;gap:12px}
+    .link{
+      display:flex;align-items:center;gap:14px;background:var(--branco);color:var(--texto);
+      text-decoration:none;border-radius:14px;padding:15px 16px;font-size:16px;font-weight:600;
+      box-shadow:0 2px 8px rgba(0,0,0,.18);transition:transform .06s ease, box-shadow .15s ease;
+    }
+    .link:active{transform:scale(.99)}
+    .link .ic{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:0 0 40px}
+    .link .ic svg{width:22px;height:22px;display:block}
+    .link .seta{margin-left:auto;color:var(--mudo);font-size:18px}
+    .ig{background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7)}
+    .tt{background:#000}
+    .yt{background:#ff0000}
+    .pa{background:var(--cafe)}
+    .pe{background:#2e7d5b}
+    .destaque{outline:2px solid rgba(255,255,255,.25)}
+    footer{margin-top:30px;color:#c9b6a3;font-size:12px;text-align:center}
+  </style>
+</head>
+<body>
+
+  <!-- Avatar (copo pra viagem + vapor nas cores do semáforo) -->
+  <svg class="avatar" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg" aria-label="Coffilipe">
+    <rect width="1080" height="1080" fill="#3d2519"/>
+    <circle cx="524" cy="318" r="26" fill="#e2483a"/>
+    <circle cx="566" cy="256" r="24" fill="#f2b134"/>
+    <circle cx="602" cy="198" r="22" fill="#3ba86b"/>
+    <path d="M441 452 L639 452 L612 742 Q610 764 588 764 L492 764 Q470 764 468 742 Z" fill="#fbf4ea"/>
+    <path d="M455 556 L625 556 L616 636 L464 636 Z" fill="#5b3a29"/>
+    <path d="M427 452 L653 452 L653 430 Q653 414 637 414 L443 414 Q427 414 427 430 Z" fill="#efe0cb"/>
+  </svg>
+
+  <h1>Coffilipe</h1>
+  <p class="tag">Um bom dia, escrito à mão ☕✍️</p>
+
+  <div class="links">
+    <a class="link" id="lk-ig" href="https://instagram.com" target="_blank" rel="noopener">
+      <span class="ic ig"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg></span>
+      Instagram
+      <span class="seta">›</span>
+    </a>
+
+    <a class="link" id="lk-tt" href="https://tiktok.com" target="_blank" rel="noopener">
+      <span class="ic tt"><svg viewBox="0 0 24 24" fill="#fff"><path d="M16.5 3c.3 2 1.6 3.6 3.5 3.9V9.4c-1.4 0-2.7-.4-3.8-1.1v6.1c0 3.1-2.5 5.6-5.6 5.6S5 17.5 5 14.4s2.5-5.6 5.6-5.6c.3 0 .6 0 .9.1v2.7c-.3-.1-.6-.2-.9-.2A3 3 0 1 0 13.6 14V3h2.9Z"/></svg></span>
+      TikTok
+      <span class="seta">›</span>
+    </a>
+
+    <a class="link" id="lk-yt" href="https://youtube.com" target="_blank" rel="noopener">
+      <span class="ic yt"><svg viewBox="0 0 24 24" fill="#fff"><path d="M21.6 7.2s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C16 4 12 4 12 4s-4 0-6.8.3c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.4c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.8.8 1.8.8 2.3.9C6.9 20 12 20 12 20s4 0 6.8-.3c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.4c0-1.7-.2-3.6-.2-3.6ZM10 14.5v-5l4.2 2.5-4.2 2.5Z"/></svg></span>
+      YouTube
+      <span class="seta">›</span>
+    </a>
+
+    <a class="link" id="lk-pa" href="mailto:filipeaugusto14@gmail.com?subject=Parceria%20com%20o%20Coffilipe">
+      <span class="ic pa" style="font-size:20px">🤝</span>
+      Contato para parcerias
+      <span class="seta">›</span>
+    </a>
+
+    <a class="link destaque" id="lk-pe" href="https://filipeaugusto14.github.io/pesquisa-coffilipe/" target="_blank" rel="noopener">
+      <span class="ic pe" style="font-size:20px">📝</span>
+      Responder a pesquisa (1 min)
+      <span class="seta">›</span>
+    </a>
+  </div>
+
+  <footer>☕ Coffilipe · café no sinal</footer>
+</body>
+</html>
