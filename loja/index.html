@@ -28,6 +28,12 @@
     .prod .oferta{display:block;text-align:center;text-decoration:none;padding:10px;border-radius:10px;font-weight:700;font-size:13.5px}
     .prod .oferta:active{transform:scale(.99)}
     .aviso{max-width:820px;margin:6px auto 0;padding:0 16px;color:var(--mudo);font-size:12px;text-align:center}
+    .filtros{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;max-width:820px;margin:14px auto 0;padding:0 16px}
+    .fchip{border:1px solid var(--borda);background:var(--branco);border-radius:20px;padding:8px 15px;font-size:13px;font-weight:600;cursor:pointer;color:var(--texto)}
+    .fchip.on{background:var(--cafe);color:#fff;border-color:var(--cafe)}
+    .pub{align-self:flex-start;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;margin-bottom:2px}
+    .pub-v{background:#e7f5ee;color:#1f7a4d}
+    .pub-c{background:var(--creme2);color:var(--cafe)}
     .estado{text-align:center;color:var(--mudo);padding:50px 16px}
     .rodape{text-align:center;color:var(--mudo);font-size:12px;padding:24px 0 34px}
   </style>
@@ -42,6 +48,12 @@
   </header>
 
   <p class="aviso">Alguns links são de afiliado — posso ganhar uma pequena comissão, sem custo extra pra você. 💛</p>
+
+  <div class="filtros" id="filtros">
+    <button class="fchip on" onclick="filtrarLoja('todos',this)">Todos</button>
+    <button class="fchip" onclick="filtrarLoja('consumidor',this)">☕ Para você</button>
+    <button class="fchip" onclick="filtrarLoja('vendedor',this)">🛒 Para vender café</button>
+  </div>
 
   <main>
     <div id="grade" class="grade"></div>
@@ -65,12 +77,30 @@
     function badgeMarket(n){ if(!n) return ''; var c=corMarket(n);
       return '<span style="display:inline-block;align-self:flex-start;background:'+c[0]+';color:'+c[1]+';font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px">'+esc(n)+'</span>'; }
 
-    function receberLoja(itens){
+    var TODOS = [], FILTRO = 'todos';
+    function badgePublico(pub){
+      return (pub==='vendedor')
+        ? '<span class="pub pub-v">🛒 pra vender café</span>'
+        : '<span class="pub pub-c">☕ pra você</span>';
+    }
+    function receberLoja(itens){ TODOS = itens || []; renderLoja(); }
+    function filtrarLoja(f, btn){
+      FILTRO = f;
+      var chips = document.querySelectorAll('.fchip');
+      for(var i=0;i<chips.length;i++) chips[i].classList.toggle('on', chips[i]===btn);
+      renderLoja();
+    }
+    function renderLoja(){
       var grade = document.getElementById('grade');
       var estado = document.getElementById('estado');
-      itens = itens || [];
-      if(!itens.length){ estado.textContent = 'Em breve, produtos recomendados aqui 🙂'; return; }
-      estado.style.display = 'none';
+      var itens = TODOS.filter(function(p){ return FILTRO==='todos' || (p.publico||'consumidor')===FILTRO; });
+      if(!itens.length){
+        grade.innerHTML='';
+        estado.style.display='';
+        estado.textContent = TODOS.length ? 'Nenhum produto nesse filtro por enquanto.' : 'Em breve, produtos recomendados aqui 🙂';
+        return;
+      }
+      estado.style.display='none';
       grade.innerHTML = itens.map(function(p){
         var foto = p.foto
           ? '<img class="foto" src="'+esc(p.foto)+'" alt="'+esc(p.titulo)+'" loading="lazy" onerror="this.style.display=\'none\'">'
@@ -80,7 +110,7 @@
           return '<a class="oferta" style="background:'+c[0]+';color:'+c[1]+'" href="'+esc(o.link)+'" target="_blank" rel="noopener nofollow sponsored">'+(o.loja?esc(o.loja):'Comprar')+' →</a>';
         }).join('');
         return '<div class="prod">'+foto+
-          '<div class="corpo"><div class="tit">'+esc(p.titulo)+'</div>'+preco+
+          '<div class="corpo">'+badgePublico(p.publico)+'<div class="tit">'+esc(p.titulo)+'</div>'+preco+
           '<div class="ofertas">'+botoes+'</div></div></div>';
       }).join('');
     }
