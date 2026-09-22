@@ -53,6 +53,16 @@
     var URL_BACKEND = 'https://script.google.com/macros/s/AKfycbz5eqDGRsC3L91xt9qBE0EA-fAVQbf6bvEBDElCxLmbcXlsJRtReUizc9oZ9AS92T2v8w/exec';
 
     function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function corMarket(n){ n=(n||'').toLowerCase();
+      if(n.indexOf('mercado')>=0) return ['#ffe600','#2a2a2a'];
+      if(n.indexOf('amazon')>=0) return ['#232f3e','#fff'];
+      if(n.indexOf('shopee')>=0) return ['#ee4d2d','#fff'];
+      if(n.indexOf('ali')>=0) return ['#e62e04','#fff'];
+      if(n.indexOf('magalu')>=0||n.indexOf('magazine')>=0) return ['#0086ff','#fff'];
+      if(n.indexOf('americanas')>=0) return ['#e60014','#fff'];
+      return ['#5b3a29','#fff']; }
+    function badgeMarket(n){ if(!n) return ''; var c=corMarket(n);
+      return '<span style="display:inline-block;align-self:flex-start;background:'+c[0]+';color:'+c[1]+';font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px">'+esc(n)+'</span>'; }
 
     function receberLoja(itens){
       var grade = document.getElementById('grade');
@@ -66,7 +76,7 @@
           : '';
         var preco = p.preco ? '<div class="preco">'+esc(p.preco)+'</div>' : '';
         return '<div class="prod">'+foto+
-          '<div class="corpo"><div class="tit">'+esc(p.titulo)+'</div>'+preco+
+          '<div class="corpo">'+badgeMarket(p.marketplace)+'<div class="tit">'+esc(p.titulo)+'</div>'+preco+
           '<a class="btn" href="'+esc(p.link)+'" target="_blank" rel="noopener nofollow sponsored">Comprar →</a></div></div>';
       }).join('');
     }
