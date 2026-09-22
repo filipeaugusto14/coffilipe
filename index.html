@@ -56,7 +56,8 @@
     .card .corpo{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
     .card .tit{font-size:13.5px;font-weight:600;line-height:1.25}
     .card .preco{color:var(--verde);font-weight:700;font-size:14px}
-    .card .comprar{margin-top:auto;text-align:center;background:var(--cafe);color:#fff;text-decoration:none;padding:9px;border-radius:9px;font-weight:600;font-size:13px}
+    .card .ofertas{margin-top:auto;display:flex;flex-direction:column;gap:6px}
+    .card .oferta{text-align:center;text-decoration:none;padding:9px;border-radius:9px;font-weight:700;font-size:12.5px}
     .prod-vazio{background:rgba(255,255,255,.08);border:1px dashed rgba(255,255,255,.25);border-radius:14px;padding:24px 16px;text-align:center;color:#e8d8c8;font-size:14px}
     .prod-aviso{color:var(--mudo);font-size:11px;text-align:center;margin-top:12px}
 
@@ -141,8 +142,11 @@
       grade.innerHTML = itens.slice(0, 8).map(function(p){
         var foto = p.foto ? '<img class="foto" src="'+esc(p.foto)+'" alt="'+esc(p.titulo)+'" loading="lazy" onerror="this.style.display=\'none\'">' : '';
         var preco = p.preco ? '<div class="preco">'+esc(p.preco)+'</div>' : '';
-        return '<div class="card">'+foto+'<div class="corpo">'+badgeMarket(p.marketplace)+'<div class="tit">'+esc(p.titulo)+'</div>'+preco+
-          '<a class="comprar" href="'+esc(p.link)+'" target="_blank" rel="noopener nofollow sponsored">Comprar →</a></div></div>';
+        var botoes = (p.ofertas||[]).map(function(o){ var c=corMarket(o.loja);
+          return '<a class="oferta" style="background:'+c[0]+';color:'+c[1]+'" href="'+esc(o.link)+'" target="_blank" rel="noopener nofollow sponsored">'+(o.loja?esc(o.loja):'Comprar')+' →</a>';
+        }).join('');
+        return '<div class="card">'+foto+'<div class="corpo"><div class="tit">'+esc(p.titulo)+'</div>'+preco+
+          '<div class="ofertas">'+botoes+'</div></div></div>';
       }).join('');
     }
 
