@@ -107,7 +107,8 @@
           : '';
         var preco = p.preco ? '<div class="preco">'+esc(p.preco)+'</div>' : '';
         var botoes = (p.ofertas||[]).map(function(o){ var c=corMarket(o.loja);
-          return '<a class="oferta" style="background:'+c[0]+';color:'+c[1]+'" href="'+esc(o.link)+'" target="_blank" rel="noopener nofollow sponsored">'+(o.loja?esc(o.loja):'Comprar')+' →</a>';
+          var alvoP = 'Produto: '+p.titulo+(o.loja?(' ('+o.loja+')'):'');
+          return '<a class="oferta" data-track="'+esc(alvoP)+'" style="background:'+c[0]+';color:'+c[1]+'" href="'+esc(o.link)+'" target="_blank" rel="noopener nofollow sponsored">'+(o.loja?esc(o.loja):'Comprar')+' →</a>';
         }).join('');
         return '<div class="prod">'+foto+
           '<div class="corpo">'+badgePublico(p.publico)+'<div class="tit">'+esc(p.titulo)+'</div>'+preco+
@@ -122,6 +123,20 @@
       s.onerror = function(){ document.getElementById('estado').textContent = 'Não consegui carregar os produtos. Tente recarregar.'; };
       document.body.appendChild(s);
     })();
+
+    // Rastreio de cliques/abertura (mesmo backend dos demais).
+    function track(alvo, destino){
+      try{
+        var payload = JSON.stringify({ form:'clique', alvo:alvo, destino:destino||'', pagina:'loja', ref:document.referrer||'' });
+        if(navigator.sendBeacon){ navigator.sendBeacon(URL_BACKEND, new Blob([payload], { type:'text/plain' })); }
+        else { fetch(URL_BACKEND, { method:'POST', mode:'no-cors', keepalive:true, headers:{'Content-Type':'text/plain'}, body:payload }); }
+      }catch(e){}
+    }
+    document.addEventListener('click', function(e){
+      var a = e.target.closest && e.target.closest('[data-track]');
+      if(a) track(a.getAttribute('data-track'), a.getAttribute('href') || '');
+    }, true);
+    track('(abertura)', location.href);
   </script>
 </body>
 </html>
