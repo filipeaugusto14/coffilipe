@@ -177,6 +177,7 @@
       var a = e.target.closest && e.target.closest('[data-track]');
       if(a) track(a.getAttribute('data-track'), a.getAttribute('href') || '');
     }, true);
+    track('Abriu a página', location.href);
   </script>
 </body>
 </html>
