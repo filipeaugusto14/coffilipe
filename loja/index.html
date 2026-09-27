@@ -83,7 +83,11 @@
         ? '<span class="pub pub-v">🛒 pra vender café</span>'
         : '<span class="pub pub-c">☕ pra você</span>';
     }
-    function receberLoja(itens){ TODOS = itens || []; renderLoja(); }
+    function receberLoja(itens){
+      TODOS = itens || [];
+      try { localStorage.setItem('cffl_loja', JSON.stringify(TODOS)); } catch(e){}
+      renderLoja();
+    }
     function filtrarLoja(f, btn){
       FILTRO = f;
       var chips = document.querySelectorAll('.fchip');
@@ -116,7 +120,10 @@
       }).join('');
     }
 
-    // Carrega os produtos via JSONP (funciona cross-origin e em navegador embutido).
+    // Mostra na hora o que já foi carregado antes (visita repetida = instantâneo).
+    try { var cache = localStorage.getItem('cffl_loja'); if(cache){ TODOS = JSON.parse(cache); renderLoja(); } } catch(e){}
+
+    // Carrega/atualiza via JSONP (funciona cross-origin e em navegador embutido).
     (function(){
       var s = document.createElement('script');
       s.src = URL_BACKEND + '?loja=1&callback=receberLoja&t=' + Date.now();

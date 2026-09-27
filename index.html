@@ -141,6 +141,7 @@
       var estado = document.getElementById('prod-estado');
       itens = itens || [];
       if(!itens.length){ estado.textContent = 'Em breve, produtos recomendados aqui 🙂'; return; }
+      try { localStorage.setItem('cffl_loja', JSON.stringify(itens)); } catch(e){}
       estado.style.display = 'none';
       grade.innerHTML = itens.slice(0, 8).map(function(p){
         var foto = p.foto ? '<img class="foto" src="'+esc(p.foto)+'" alt="'+esc(p.titulo)+'" loading="lazy" onerror="this.style.display=\'none\'">' : '';
@@ -154,6 +155,9 @@
           '<div class="ofertas">'+botoes+'</div></div></div>';
       }).join('');
     }
+
+    // Mostra na hora o que já carregou antes (visita repetida = instantâneo).
+    try { var cacheL = localStorage.getItem('cffl_loja'); if(cacheL){ receberLoja(JSON.parse(cacheL)); } } catch(e){}
 
     (function(){
       var s = document.createElement('script');
