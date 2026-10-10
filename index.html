@@ -49,6 +49,7 @@
     .card .corpo{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
     .card .tit{font-size:13.5px;font-weight:600;line-height:1.25}
     .card .preco{color:var(--verde);font-weight:700;font-size:14px}
+    .card .obs{font-size:11.5px;color:#6b5a4c;line-height:1.3;background:var(--creme);border-left:3px solid var(--creme2);padding:6px 8px;border-radius:0 7px 7px 0;white-space:pre-wrap}
     .card .ofertas{margin-top:auto;display:flex;flex-direction:column;gap:6px}
     .card .oferta{text-align:center;text-decoration:none;padding:9px;border-radius:9px;font-weight:700;font-size:12.5px}
     .prod-vazio{background:rgba(255,255,255,.08);border:1px dashed rgba(255,255,255,.25);border-radius:14px;padding:22px 16px;text-align:center;color:#e8d8c8;font-size:14px;margin-top:10px}
@@ -156,11 +157,12 @@
     function cardHtml(p){
       var foto = p.foto ? '<img class="foto" src="'+esc(p.foto)+'" alt="'+esc(p.titulo)+'" loading="lazy" onerror="this.style.display=\'none\'">' : '';
       var preco = p.preco ? '<div class="preco">'+esc(p.preco)+'</div>' : '';
+      var obs = p.obs ? '<div class="obs">'+esc(p.obs)+'</div>' : '';
       var botoes = (p.ofertas||[]).map(function(o){ var c=corMarket(o.loja);
         var alvoP = 'Produto: '+p.titulo+(o.loja?(' ('+o.loja+')'):'');
         return '<a class="oferta" data-track="'+esc(alvoP)+'" style="background:'+c[0]+';color:'+c[1]+'" href="'+esc(o.link)+'" target="_blank" rel="noopener nofollow sponsored">'+(o.loja?esc(o.loja):'Comprar')+' →</a>';
       }).join('');
-      return '<div class="card">'+foto+'<div class="corpo"><div class="tit">'+esc(p.titulo)+'</div>'+preco+
+      return '<div class="card">'+foto+'<div class="corpo"><div class="tit">'+esc(p.titulo)+'</div>'+preco+obs+
         '<div class="ofertas">'+botoes+'</div></div></div>';
     }
 
