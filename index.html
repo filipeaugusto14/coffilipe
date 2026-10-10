@@ -17,40 +17,33 @@
     }
     .avatar{width:104px;height:104px;border-radius:50%;box-shadow:0 6px 22px rgba(0,0,0,.3);border:3px solid rgba(255,255,255,.18)}
     h1{margin:12px 0 2px;font-size:24px;font-family:Georgia,"Times New Roman",serif}
-    .tag{margin:0;color:#e8d8c8;font-size:14px}
+    .tag{margin:0 0 4px;color:#e8d8c8;font-size:14px}
 
-    /* Duas colunas: links à esquerda, produtos à direita */
-    .colunas{width:100%;max-width:940px;margin-top:28px;display:flex;gap:22px;align-items:flex-start}
-    .col-links{flex:0 0 380px;display:flex;flex-direction:column;gap:12px}
-    .col-produtos{flex:1;min-width:0}
-    @media (max-width:820px){
-      .colunas{flex-direction:column;max-width:460px}
-      .col-links{flex:none;width:100%}
-    }
-
-    .link{
-      display:flex;align-items:center;gap:14px;background:var(--branco);color:var(--texto);
-      text-decoration:none;border-radius:14px;padding:15px 16px;font-size:16px;font-weight:600;
+    /* Chamadas principais (parcerias + pesquisa) */
+    .ctas{width:100%;max-width:620px;margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+    .cta{
+      flex:1 1 250px;display:flex;align-items:center;gap:13px;background:var(--branco);color:var(--texto);
+      text-decoration:none;border-radius:14px;padding:14px 16px;font-size:15.5px;font-weight:600;
       box-shadow:0 2px 8px rgba(0,0,0,.18);
     }
-    .link:active{transform:scale(.99)}
-    .link .ic{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:0 0 40px}
-    .link .ic svg{width:22px;height:22px;display:block}
-    .link .seta{margin-left:auto;color:var(--mudo);font-size:18px}
-    .ig{background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7)}
-    .tt{background:#000}
-    .yt{background:#ff0000}
+    .cta:active{transform:scale(.99)}
+    .cta .ic{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:0 0 38px;font-size:19px}
+    .cta .seta{margin-left:auto;color:var(--mudo);font-size:18px}
     .pa{background:var(--cafe)}
     .pe{background:#2e7d5b}
-    .destaque{outline:2px solid rgba(255,255,255,.25)}
+    .cta.destaque{outline:2px solid rgba(255,255,255,.28)}
 
-    /* Coluna de produtos */
-    .prod-topo{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
-    .prod-topo h2{font-size:17px;margin:0}
-    .prod-topo a{color:#ffd9a8;font-size:13px;text-decoration:none}
-    .prod-grade{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width:820px){ .prod-grade{grid-template-columns:1fr 1fr} }
-    @media (max-width:440px){ .prod-grade{grid-template-columns:1fr} }
+    /* Painéis de produtos */
+    .paineis{width:100%;max-width:940px;margin-top:26px;display:flex;flex-direction:column;gap:26px}
+    .painel-topo{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+    .painel-topo .selo{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex:0 0 38px}
+    .selo-c{background:rgba(255,255,255,.14)}
+    .selo-v{background:rgba(46,125,91,.28)}
+    .painel-topo h2{font-size:17px;margin:0;line-height:1.15}
+    .painel-topo p{margin:2px 0 0;font-size:12.5px;color:#e8d8c8}
+    .painel-topo .vertodos{margin-left:auto;color:#ffd9a8;font-size:13px;text-decoration:none;white-space:nowrap;align-self:flex-start;padding-top:4px}
+
+    .prod-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:10px}
     .card{background:var(--branco);color:var(--texto);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 2px 8px rgba(0,0,0,.18)}
     .card .foto{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff;padding:8px}
     .card .corpo{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
@@ -58,13 +51,19 @@
     .card .preco{color:var(--verde);font-weight:700;font-size:14px}
     .card .ofertas{margin-top:auto;display:flex;flex-direction:column;gap:6px}
     .card .oferta{text-align:center;text-decoration:none;padding:9px;border-radius:9px;font-weight:700;font-size:12.5px}
-    .card .pub{align-self:flex-start;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px}
-    .card .pub-v{background:#e7f5ee;color:#1f7a4d}
-    .card .pub-c{background:var(--creme2);color:var(--cafe)}
-    .prod-vazio{background:rgba(255,255,255,.08);border:1px dashed rgba(255,255,255,.25);border-radius:14px;padding:24px 16px;text-align:center;color:#e8d8c8;font-size:14px}
-    .prod-aviso{color:var(--mudo);font-size:11px;text-align:center;margin-top:12px}
+    .prod-vazio{background:rgba(255,255,255,.08);border:1px dashed rgba(255,255,255,.25);border-radius:14px;padding:22px 16px;text-align:center;color:#e8d8c8;font-size:14px;margin-top:10px}
+    .prod-aviso{color:var(--mudo);font-size:11px;text-align:center;margin-top:18px}
 
-    footer{margin-top:30px;color:#c9b6a3;font-size:12px;text-align:center}
+    /* Redes sociais (ícones) no rodapé */
+    .social{display:flex;gap:16px;justify-content:center;margin-top:34px}
+    .social a{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,.25)}
+    .social a:active{transform:scale(.95)}
+    .social svg{width:25px;height:25px;display:block}
+    .ig{background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7)}
+    .tt{background:#000}
+    .yt{background:#ff0000}
+
+    footer{margin-top:20px;color:#c9b6a3;font-size:12px;text-align:center}
   </style>
 </head>
 <body>
@@ -83,41 +82,61 @@
   <h1>Coffilipe</h1>
   <p class="tag">Um bom dia, escrito à mão ☕✍️</p>
 
-  <div class="colunas">
-    <!-- COLUNA ESQUERDA: LINKS -->
-    <div class="col-links">
-      <a class="link" data-track="Instagram" href="https://instagram.com/coffilipe" target="_blank" rel="noopener">
-        <span class="ic ig"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg></span>
-        Instagram <span class="seta">›</span>
-      </a>
-      <a class="link" data-track="TikTok" href="https://tiktok.com/@coffilipe" target="_blank" rel="noopener">
-        <span class="ic tt"><svg viewBox="0 0 24 24" fill="#fff"><path d="M16.5 3c.3 2 1.6 3.6 3.5 3.9V9.4c-1.4 0-2.7-.4-3.8-1.1v6.1c0 3.1-2.5 5.6-5.6 5.6S5 17.5 5 14.4s2.5-5.6 5.6-5.6c.3 0 .6 0 .9.1v2.7c-.3-.1-.6-.2-.9-.2A3 3 0 1 0 13.6 14V3h2.9Z"/></svg></span>
-        TikTok <span class="seta">›</span>
-      </a>
-      <a class="link" data-track="YouTube" href="https://www.youtube.com/@Coffilipe" target="_blank" rel="noopener">
-        <span class="ic yt"><svg viewBox="0 0 24 24" fill="#fff"><path d="M21.6 7.2s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C16 4 12 4 12 4s-4 0-6.8.3c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.4c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.8.8 1.8.8 2.3.9C6.9 20 12 20 12 20s4 0 6.8-.3c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.4c0-1.7-.2-3.6-.2-3.6ZM10 14.5v-5l4.2 2.5-4.2 2.5Z"/></svg></span>
-        YouTube <span class="seta">›</span>
-      </a>
-      <a class="link" data-track="Parcerias" href="parcerias/">
-        <span class="ic pa" style="font-size:20px">🤝</span>
-        Contato para parcerias <span class="seta">›</span>
-      </a>
-      <a class="link destaque" data-track="Pesquisa" href="https://filipeaugusto14.github.io/pesquisa-coffilipe/" target="_blank" rel="noopener">
-        <span class="ic pe" style="font-size:20px">📝</span>
-        Responder a pesquisa (1 min) <span class="seta">›</span>
-      </a>
-    </div>
+  <!-- Chamadas principais -->
+  <div class="ctas">
+    <a class="cta destaque" data-track="Pesquisa" href="https://filipeaugusto14.github.io/pesquisa-coffilipe/" target="_blank" rel="noopener">
+      <span class="ic pe">📝</span>
+      Responder a pesquisa (1 min) <span class="seta">›</span>
+    </a>
+    <a class="cta" data-track="Parcerias" href="parcerias/">
+      <span class="ic pa">🤝</span>
+      Contato para parcerias <span class="seta">›</span>
+    </a>
+  </div>
 
-    <!-- COLUNA DIREITA: PRODUTOS -->
-    <div class="col-produtos">
-      <div class="prod-topo">
-        <h2>🛒 Produtos que recomendo</h2>
-        <a data-track="Ver a loja" href="loja/">ver a loja →</a>
+  <!-- Painéis de produtos (consumidor x empreendedor) -->
+  <div class="paineis">
+
+    <section class="painel">
+      <div class="painel-topo">
+        <span class="selo selo-c">☕</span>
+        <div>
+          <h2>Pra você</h2>
+          <p>Presentes e cafés pra quem ama um bom dia</p>
+        </div>
+        <a class="vertodos" data-track="Ver loja consumidor" href="loja/?p=consumidor">ver todos →</a>
       </div>
-      <div id="prod-grade" class="prod-grade"></div>
-      <div id="prod-estado" class="prod-vazio">Carregando…</div>
-      <p class="prod-aviso">Links de afiliado — posso ganhar uma comissão, sem custo pra você. 💛</p>
-    </div>
+      <div id="grade-consumidor" class="prod-grade"></div>
+      <div id="estado-consumidor" class="prod-vazio">Carregando…</div>
+    </section>
+
+    <section class="painel">
+      <div class="painel-topo">
+        <span class="selo selo-v">💼</span>
+        <div>
+          <h2>Pra vender café na rua</h2>
+          <p>Equipamentos e insumos pro seu ponto 🚦</p>
+        </div>
+        <a class="vertodos" data-track="Ver loja vendedor" href="loja/?p=vendedor">ver todos →</a>
+      </div>
+      <div id="grade-vendedor" class="prod-grade"></div>
+      <div id="estado-vendedor" class="prod-vazio">Carregando…</div>
+    </section>
+
+    <p class="prod-aviso">Links de afiliado — posso ganhar uma comissão, sem custo pra você. 💛</p>
+  </div>
+
+  <!-- Redes sociais -->
+  <div class="social">
+    <a class="ig" data-track="Instagram" aria-label="Instagram" href="https://instagram.com/coffilipe" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg>
+    </a>
+    <a class="tt" data-track="TikTok" aria-label="TikTok" href="https://tiktok.com/@coffilipe" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="#fff"><path d="M16.5 3c.3 2 1.6 3.6 3.5 3.9V9.4c-1.4 0-2.7-.4-3.8-1.1v6.1c0 3.1-2.5 5.6-5.6 5.6S5 17.5 5 14.4s2.5-5.6 5.6-5.6c.3 0 .6 0 .9.1v2.7c-.3-.1-.6-.2-.9-.2A3 3 0 1 0 13.6 14V3h2.9Z"/></svg>
+    </a>
+    <a class="yt" data-track="YouTube" aria-label="YouTube" href="https://www.youtube.com/@Coffilipe" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="#fff"><path d="M21.6 7.2s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C16 4 12 4 12 4s-4 0-6.8.3c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 8.8 2 10.5v1.4c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.8.8 1.8.8 2.3.9C6.9 20 12 20 12 20s4 0 6.8-.3c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.4c0-1.7-.2-3.6-.2-3.6ZM10 14.5v-5l4.2 2.5-4.2 2.5Z"/></svg>
+    </a>
   </div>
 
   <footer>☕ Coffilipe · café no sinal</footer>
@@ -133,27 +152,41 @@
       if(n.indexOf('magalu')>=0||n.indexOf('magazine')>=0) return ['#0086ff','#fff'];
       if(n.indexOf('americanas')>=0) return ['#e60014','#fff'];
       return ['#5b3a29','#fff']; }
-    function badgeMarket(n){ if(!n) return ''; var c=corMarket(n);
-      return '<span style="display:inline-block;align-self:flex-start;background:'+c[0]+';color:'+c[1]+';font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px">'+esc(n)+'</span>'; }
+
+    function cardHtml(p){
+      var foto = p.foto ? '<img class="foto" src="'+esc(p.foto)+'" alt="'+esc(p.titulo)+'" loading="lazy" onerror="this.style.display=\'none\'">' : '';
+      var preco = p.preco ? '<div class="preco">'+esc(p.preco)+'</div>' : '';
+      var botoes = (p.ofertas||[]).map(function(o){ var c=corMarket(o.loja);
+        var alvoP = 'Produto: '+p.titulo+(o.loja?(' ('+o.loja+')'):'');
+        return '<a class="oferta" data-track="'+esc(alvoP)+'" style="background:'+c[0]+';color:'+c[1]+'" href="'+esc(o.link)+'" target="_blank" rel="noopener nofollow sponsored">'+(o.loja?esc(o.loja):'Comprar')+' →</a>';
+      }).join('');
+      return '<div class="card">'+foto+'<div class="corpo"><div class="tit">'+esc(p.titulo)+'</div>'+preco+
+        '<div class="ofertas">'+botoes+'</div></div></div>';
+    }
+
+    function pintarPainel(grupo, itens){
+      var grade = document.getElementById('grade-'+grupo);
+      var estado = document.getElementById('estado-'+grupo);
+      if(!grade) return;
+      if(!itens.length){
+        grade.innerHTML='';
+        estado.style.display='';
+        estado.textContent = (grupo==='vendedor')
+          ? 'Em breve, indicações pra quem vai vender café 🚦'
+          : 'Em breve, indicações pra você ☕';
+        return;
+      }
+      estado.style.display='none';
+      grade.innerHTML = itens.slice(0,6).map(cardHtml).join('');
+    }
 
     function receberLoja(itens){
-      var grade = document.getElementById('prod-grade');
-      var estado = document.getElementById('prod-estado');
       itens = itens || [];
-      if(!itens.length){ estado.textContent = 'Em breve, produtos recomendados aqui 🙂'; return; }
       try { localStorage.setItem('cffl_loja', JSON.stringify(itens)); } catch(e){}
-      estado.style.display = 'none';
-      grade.innerHTML = itens.slice(0, 8).map(function(p){
-        var foto = p.foto ? '<img class="foto" src="'+esc(p.foto)+'" alt="'+esc(p.titulo)+'" loading="lazy" onerror="this.style.display=\'none\'">' : '';
-        var preco = p.preco ? '<div class="preco">'+esc(p.preco)+'</div>' : '';
-        var botoes = (p.ofertas||[]).map(function(o){ var c=corMarket(o.loja);
-          var alvoP = 'Produto: '+p.titulo+(o.loja?(' ('+o.loja+')'):'');
-          return '<a class="oferta" data-track="'+esc(alvoP)+'" style="background:'+c[0]+';color:'+c[1]+'" href="'+esc(o.link)+'" target="_blank" rel="noopener nofollow sponsored">'+(o.loja?esc(o.loja):'Comprar')+' →</a>';
-        }).join('');
-        var pub = (p.publico==='vendedor') ? '<span class="pub pub-v">🛒 pra vender</span>' : '<span class="pub pub-c">☕ pra você</span>';
-        return '<div class="card">'+foto+'<div class="corpo">'+pub+'<div class="tit">'+esc(p.titulo)+'</div>'+preco+
-          '<div class="ofertas">'+botoes+'</div></div></div>';
-      }).join('');
+      var vend = itens.filter(function(p){ return (p.publico||'consumidor')==='vendedor'; });
+      var cons = itens.filter(function(p){ return (p.publico||'consumidor')!=='vendedor'; });
+      pintarPainel('consumidor', cons);
+      pintarPainel('vendedor', vend);
     }
 
     // Mostra na hora o que já carregou antes (visita repetida = instantâneo).
@@ -162,7 +195,11 @@
     (function(){
       var s = document.createElement('script');
       s.src = URL_BACKEND + '?loja=1&callback=receberLoja&t=' + Date.now();
-      s.onerror = function(){ document.getElementById('prod-estado').textContent = 'Não consegui carregar os produtos.'; };
+      s.onerror = function(){
+        ['consumidor','vendedor'].forEach(function(g){
+          var e=document.getElementById('estado-'+g); if(e){ e.style.display=''; e.textContent='Não consegui carregar os produtos.'; }
+        });
+      };
       document.body.appendChild(s);
     })();
 

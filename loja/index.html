@@ -120,6 +120,20 @@
       }).join('');
     }
 
+    // Filtro inicial pela URL (?p=consumidor | ?p=vendedor), vindo dos painéis da bio.
+    (function(){
+      var m = (location.search.match(/[?&]p=([^&]+)/) || [])[1];
+      var p = m ? decodeURIComponent(m).toLowerCase() : '';
+      if(p==='vendedor' || p==='consumidor'){
+        FILTRO = p;
+        var chips = document.querySelectorAll('.fchip');
+        for(var i=0;i<chips.length;i++){
+          var on = chips[i].getAttribute('onclick').indexOf("'"+p+"'")>=0;
+          chips[i].classList.toggle('on', on);
+        }
+      }
+    })();
+
     // Mostra na hora o que já foi carregado antes (visita repetida = instantâneo).
     try { var cache = localStorage.getItem('cffl_loja'); if(cache){ TODOS = JSON.parse(cache); renderLoja(); } } catch(e){}
 
