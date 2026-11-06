@@ -46,6 +46,9 @@
     .prod-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:10px}
     .card{background:var(--branco);color:var(--texto);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 2px 8px rgba(0,0,0,.18)}
     .card .foto{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff;padding:8px}
+    .card .thumbs{display:flex;gap:5px;padding:7px 10px 0;overflow-x:auto}
+    .card .thumbs img{width:38px;height:38px;object-fit:cover;border-radius:7px;border:1px solid var(--borda);cursor:pointer;flex:0 0 auto;background:#fff}
+    .card .thumbs img.on{border-color:var(--cafe);border-width:2px}
     .card .corpo{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
     .card .tit{font-size:13.5px;font-weight:600;line-height:1.25}
     .card .preco{color:var(--verde);font-weight:700;font-size:14px}
@@ -154,8 +157,29 @@
       if(n.indexOf('americanas')>=0) return ['#e60014','#fff'];
       return ['#5b3a29','#fff']; }
 
+    var UID = 0;
+    function fotosDe(p){
+      var f = (p.fotos && p.fotos.length) ? p.fotos : (p.foto ? [p.foto] : []);
+      return f.filter(function(u){ return u; });
+    }
+    function galeriaHtml(p){
+      var fotos = fotosDe(p);
+      if(!fotos.length) return '';
+      var id = 'g'+(++UID);
+      var principal = '<img class="foto" id="'+id+'" src="'+esc(fotos[0])+'" alt="'+esc(p.titulo)+'" loading="lazy" onerror="this.style.display=\'none\'">';
+      if(fotos.length < 2) return principal;
+      var thumbs = fotos.map(function(u,i){
+        return '<img src="'+esc(u)+'"'+(i===0?' class="on"':'')+' loading="lazy" onerror="this.style.display=\'none\'" onclick="trocarFoto(\''+id+'\',this)">';
+      }).join('');
+      return principal + '<div class="thumbs">'+thumbs+'</div>';
+    }
+    function trocarFoto(id, el){
+      var main = document.getElementById(id); if(main) main.src = el.src;
+      var irmaos = el.parentNode.querySelectorAll('img');
+      for(var i=0;i<irmaos.length;i++) irmaos[i].classList.toggle('on', irmaos[i]===el);
+    }
     function cardHtml(p){
-      var foto = p.foto ? '<img class="foto" src="'+esc(p.foto)+'" alt="'+esc(p.titulo)+'" loading="lazy" onerror="this.style.display=\'none\'">' : '';
+      var foto = galeriaHtml(p);
       var preco = p.preco ? '<div class="preco">'+esc(p.preco)+'</div>' : '';
       var obs = p.obs ? '<div class="obs">'+esc(p.obs)+'</div>' : '';
       var botoes = (p.ofertas||[]).map(function(o){ var c=corMarket(o.loja);
